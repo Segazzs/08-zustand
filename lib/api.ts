@@ -36,14 +36,8 @@ export const noteDelete = async (id: string): Promise<Note> => {
   return res.data;
 };
 
-export const noteCreate = async ({
-  title,
-  content,
-  tag,
-}: FormValues): Promise<Note> => {
-  const newNote = { title, content, tag };
-
-  const res = await axios.post<Note>(API_URL, newNote, { headers });
+export const noteCreate = async (data: FormValues) => {
+  const res = await axios.post<Note>(API_URL, data, { headers });
   return res.data;
 };
 

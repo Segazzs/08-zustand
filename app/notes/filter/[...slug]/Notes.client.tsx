@@ -11,6 +11,7 @@ import css from "./Slug.module.css";
 import Modal from "@/components/Modal/Modal";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import NoteForm from "@/components/NoteForm/NoteForm";
+import Link from "next/link";
 
 interface NotesClientProps {
   tag?: string;
@@ -52,17 +53,11 @@ export default function NotesClient({ tag }: NotesClientProps) {
               onPageChange={setPage}
             />
           )}
-          <button className={css.button} onClick={handleOpen}>
+          <Link href="/notes/action/create" className={css.button}>
             Create note +
-          </button>
+          </Link>
         </div>
         <div className={css.notesList}>
-          {isOpen && (
-            <Modal onClose={onClose}>
-              <NoteForm onClose={onClose} />
-            </Modal>
-          )}
-
           <div className={css.notesList}>
             {isLoading && <p>Loading...</p>}
             {isError && <p>Error...</p>}

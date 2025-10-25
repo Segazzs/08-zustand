@@ -10,6 +10,28 @@ interface Props {
   params: Promise<{ slug: string[] }>;
 }
 
+export async function generateMetadata({ params }: Props) {
+  const { slug } = await params;
+
+  return {
+    title: `${slug}`,
+    description: `You are viewing notes filtered by: ${slug}.`,
+    openGraph: {
+      title: slug,
+      description: `You are viewing notes filtered by: ${slug}.`,
+      url: `http://localhost:3000/notes/filter/${slug}`,
+      images: [
+        {
+          url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+          width: 1200,
+          height: 630,
+          alt: `NoteHub filter preview (${slug})`,
+        },
+      ],
+    },
+  };
+}
+
 export default async function Tag({ params }: Props) {
   const { slug } = await params;
   const category = slug[0] === "all" ? undefined : slug[0];
