@@ -1,40 +1,30 @@
-"use client";
-
-import css from "./Home.module.css";
 import { Metadata } from "next";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import css from "./Home.module.css";
 
-export async function generateMetadata(): Promise<Metadata> {
-  return {
-    title: `Note Found`,
-    description: `This page not found`,
-    metadataBase: new URL("https://notehub.com/not-found"),
-    openGraph: {
-      title: `Note Found`,
-      description: `This page not found`,
-      url: `https://notehub.com/not-found`,
-      siteName: "NoteHub",
-      images: [
-        {
-          url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg)",
-          width: 1200,
-          height: 630,
-          alt: `Note-found`,
-        },
-      ],
-    },
-  };
-}
+export const metadata: Metadata = {
+  title: "404 — Page not found",
+  description: "This page not found",
+  metadataBase: new URL("https://notehub.com"),
+  openGraph: {
+    title: "404 — Page not found",
+    description: "This page not found",
+    url: "https://notehub.com",
+    images: [
+      {
+        url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Page not found",
+      },
+    ],
+  },
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default function NotFound() {
-  const router = useRouter();
-
-  useEffect(() => {
-    const timer = setTimeout(() => router.push("/"), 3000);
-    return () => clearTimeout(timer);
-  }, [router]);
-
   return (
     <>
       <h1 className={css.title}>404 - Page not found</h1>
