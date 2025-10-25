@@ -5,19 +5,20 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import NotesClient from "./Notes.client";
+import { Metadata } from "next";
 
 interface Props {
   params: Promise<{ slug: string[] }>;
 }
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
 
   return {
     title: `${slug}`,
     description: `You are viewing notes filtered by: ${slug}.`,
     openGraph: {
-      title: slug,
+      title: `${slug}`,
       description: `You are viewing notes filtered by: ${slug}.`,
       url: `http://localhost:3000/notes/filter/${slug}`,
       images: [

@@ -3,11 +3,12 @@
 import css from "./NoteForm.module.css";
 import { useRouter } from "next/navigation";
 import { noteCreate } from "@/lib/api";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { FormValues } from "../../types/note";
 import { useNoteDraftStore } from "@/lib/store/noteStore";
 
 export default function NoteForm() {
+  const queryClient = useQueryClient();
   const router = useRouter();
 
   const { draft, setDraft, clearDraft } = useNoteDraftStore();
@@ -27,6 +28,7 @@ export default function NoteForm() {
     mutationFn: noteCreate,
     onSuccess: () => {
       clearDraft();
+      queryClient.invalidateQueries({ queryKey: ["notes"] });
       router.push("/notes/filter/all");
     },
   });
@@ -80,9 +82,8 @@ export default function NoteForm() {
       </div>
 
       <div className={css.actions}>
-        <button formAction={handleCreate} className={css.submitButton}>
-          Create note
-        </button>
+        <button onClick={() => router.back()}>Cancel</button>
+        <button className={css.submitButton}>Create note</button>
       </div>
     </form>
   );

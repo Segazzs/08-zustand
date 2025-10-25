@@ -8,9 +8,7 @@ import { useDebounce } from "use-debounce";
 import { useEffect } from "react";
 import Pagination from "@/components/Pagination/Pagination";
 import css from "./Slug.module.css";
-import Modal from "@/components/Modal/Modal";
 import SearchBox from "@/components/SearchBox/SearchBox";
-import NoteForm from "@/components/NoteForm/NoteForm";
 import Link from "next/link";
 
 interface NotesClientProps {
@@ -20,7 +18,6 @@ interface NotesClientProps {
 export default function NotesClient({ tag }: NotesClientProps) {
   const [page, setPage] = useState(1);
   const [text, setText] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
 
   const [debouncedText] = useDebounce(text, 300);
 
@@ -31,9 +28,6 @@ export default function NotesClient({ tag }: NotesClientProps) {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
   };
-
-  const handleOpen = () => setIsOpen(true);
-  const onClose = () => setIsOpen(false);
 
   const { data, isLoading, isError, isSuccess } = useQuery({
     queryKey: ["notes", page, debouncedText, tag],
