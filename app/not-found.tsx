@@ -1,4 +1,5 @@
-("use client");
+"use client";
+
 import css from "./Home.module.css";
 import { Metadata } from "next";
 import { useEffect } from "react";
