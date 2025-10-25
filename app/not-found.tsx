@@ -1,3 +1,5 @@
+"use client";
+
 import css from "./Home.module.css";
 import { Metadata } from "next";
 import Link from "next/link";
