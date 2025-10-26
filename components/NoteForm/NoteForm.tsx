@@ -82,8 +82,12 @@ export default function NoteForm() {
       </div>
 
       <div className={css.actions}>
-        <button onClick={() => router.back()}>Cancel</button>
-        <button className={css.submitButton}>Create note</button>
+        <button type="button" onClick={() => router.back()}>
+          Cancel
+        </button>
+        <button type="submit" className={css.submitButton}>
+          Create note
+        </button>
       </div>
     </form>
   );
